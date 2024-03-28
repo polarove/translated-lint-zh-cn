@@ -19,13 +19,10 @@
     "author": "liuqi <liuqi6602@163.com>",
     "license": "MIT",
     "devDependencies": {
-        "@cz-translated-changelog/zh-cn": "^0.0.29",
+        "@cz-translated-changelog/zh-cn": "^0.0.35",
         "@types/node": "^20.11.30",
         "commitizen": "^4.3.0",
         "husky": "^9.0.11"
-    },
-    "peerDependencies": {
-        "@cz-translated-changelog/zh-cn": ">=0.0.29"
     },
     "config": {
         "commitizen": {
