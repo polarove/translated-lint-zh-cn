@@ -52,7 +52,7 @@ export const checkIgnore = (
 ) => {
 	if (ignoredCases && ignoredCases.length > 0) {
 		const shouldBeIgnored = ignoredCases.some((reg) =>
-			new RegExp(reg.rule, reg.flag).test('0.0.18')
+			new RegExp(reg.rule, reg.flag).test(msg)
 		)
 		writeFileSync(
 			'ignore.json',
