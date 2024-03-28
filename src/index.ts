@@ -58,7 +58,6 @@ const main = async () => {
 
 	if (!tempfilePath) noCommitEditMsgFileFound()
 	const message = readFileSync(tempfilePath!, { encoding: 'utf-8' })
-	writeFileSync('message.txt', message)
 	if (customConfigPath) processMsg(message, customConfigs)
 	else processMsg(message, defaultConfig)
 	hadnleQualifiedCommit('提交消息通过检查！你真棒！')

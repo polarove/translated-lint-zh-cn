@@ -51,8 +51,7 @@ export const checkIgnore = (
 	ignoredCases: Ignored[] | undefined
 ) => {
 	if (ignoredCases && ignoredCases.length > 0) {
-		let shouldBeIgnored = null
-		ignoredCases.some((reg: Ignored) =>
+		const shouldBeIgnored = ignoredCases.some((reg: Ignored) =>
 			new RegExp(reg.rule, reg.flag).test(msg)
 		)
 		if (shouldBeIgnored) {
