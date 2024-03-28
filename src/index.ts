@@ -30,51 +30,35 @@ const PATH = '--path'
  */
 const configMap = new Map<string, string>()
 process.argv.forEach((arg, index) => {
-    if (arg === CONFIG) {
-        configMap.set(CONFIG, process.argv[index + 1])
-    } else if (arg === PATH) {
-        configMap.set(PATH, process.argv[index + 1])
-    }
+	if (arg === CONFIG) {
+		configMap.set(CONFIG, process.argv[index + 1])
+	} else if (arg === PATH) {
+		configMap.set(PATH, process.argv[index + 1])
+	}
 })
 
 const main = async () => {
-    const tempfilePath = configMap.get(PATH)
-    const customConfigPath = configMap.get(CONFIG)
-    const { defaultConfig } = await getDefaultConfig()
+	const tempfilePath = configMap.get(PATH)
+	const customConfigPath = configMap.get(CONFIG)
+	const { defaultConfig } = await getDefaultConfig()
 
-    const { customConfigs } = await getCustomConfig(
-        {} as Config,
-        customConfigPath!
-    )
+	const { customConfigs } = await getCustomConfig(
+		{} as Config,
+		customConfigPath!
+	)
 
-    const processWithCustomizations = (tempfilePath: string) => {
-        processMsg(
-            readFileSync(tempfilePath, { encoding: 'utf-8' }),
-            customConfigs
-        )
-    }
+	// 一般不会发生这个情况
+	const noCommitEditMsgFileFound = () => {
+		console.warn(
+			parseLogMsg('未找到COMMIT_EDITMSG文件，跳过本次检查...', '❓')
+		)
+		exit(0)
+	}
 
-    const processWithDefaults = (
-        tempfilePath: string,
-        defaultConfig: Config
-    ) => {
-        processMsg(
-            readFileSync(tempfilePath, { encoding: 'utf-8' }),
-            defaultConfig
-        )
-    }
-
-    // 一般不会发生这个情况
-    const noCommitEditMsgFileFound = () => {
-        console.warn(
-            parseLogMsg('未找到COMMIT_EDITMSG文件，跳过本次检查...', '❓')
-        )
-        exit(0)
-    }
-
-    if (!tempfilePath) noCommitEditMsgFileFound()
-    if (customConfigPath) processWithCustomizations(tempfilePath!)
-    else processWithDefaults(tempfilePath!, defaultConfig)
-    hadnleQualifiedCommit()
+	if (!tempfilePath) noCommitEditMsgFileFound()
+	const message = readFileSync(tempfilePath!, { encoding: 'utf-8' })
+	if (customConfigPath) processMsg(message, customConfigs)
+	else processMsg(message, defaultConfig)
+	hadnleQualifiedCommit('提交消息通过检查！你真棒！')
 }
 main()

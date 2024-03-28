@@ -49,7 +49,8 @@ export const getDefaultConfig = async () => {
 		},
 		issue: {
 			startsWith: defaultTypes
-		}
+		},
+		ignored: [/^(v|merge|pull request)$/i]
 	}
 	return { defaultConfig }
 }

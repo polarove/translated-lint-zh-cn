@@ -2,7 +2,7 @@
 
 import { Body, Breakings, Header, Issue } from './types'
 import { log } from 'console'
-import { parseLogMsg, handleBadCommit } from './informer'
+import { parseLogMsg, handleBadCommit, hadnleQualifiedCommit } from './informer'
 import { exit } from 'process'
 
 const checkWidth = (
@@ -13,8 +13,7 @@ const checkWidth = (
 ) => {
 	if (maxWidth && part.length > maxWidth) {
 		handleBadCommit(
-			`${partName}已达${part.length}个字符，最多${maxWidth}个字符，请修改后再试`,
-			'❗'
+			`${partName}已达${part.length}个字符，最多${maxWidth}个字符，请修改后再试`
 		)
 		exit(exitCode)
 	}
@@ -27,12 +26,12 @@ const checkRequired = (
 	exitCode: number
 ) => {
 	if (required && part && part.trim().length <= 0) {
-		handleBadCommit(`${partName}不能为空`, '❗')
+		handleBadCommit(`${partName}不能为空`)
 		exit(exitCode)
 	}
 }
 
-export const checkInclude = (
+const checkInclude = (
 	partName: string,
 	part: string | null | undefined,
 	range: any[] | undefined,
@@ -40,10 +39,22 @@ export const checkInclude = (
 ) => {
 	if (part && range && range.length > 0 && !range.includes(part)) {
 		handleBadCommit(
-			`${partName}必须是[${range.join(',')}]中的一个，请修改后重试。`,
-			'❗'
+			`${partName}必须是[${range.join(',')}]中的一个，请修改后重试。`
 		)
 		exit(exitCode)
+	}
+}
+
+export const checkIgnore = (
+	msg: string,
+	ingoredCases: RegExp[] | undefined
+) => {
+	if (ingoredCases) {
+		const shouldBeIgnored = ingoredCases.every((reg) => reg.test(msg))
+		if (shouldBeIgnored) {
+			hadnleQualifiedCommit('根据给定规则，忽略本次检查')
+			exit(0)
+		}
 	}
 }
 
@@ -55,9 +66,9 @@ export const checkHeader = (
 ) => {
 	const w = header.split('：')
 	if (w.length < 2) {
-		handleBadCommit('标题应为👇，请确保使用中文冒号', '❗')
-		log(parseLogMsg('类型(范围)：主题内容', '❗'))
-		log(parseLogMsg('请修改后再试', '❗'))
+		handleBadCommit('标题应为👇，请确保使用中文冒号')
+		log(parseLogMsg('类型(范围)：主题内容'))
+		log(parseLogMsg('请修改后再试'))
 		exit(100)
 	}
 	const hasScope = header.includes('(')
@@ -96,9 +107,9 @@ export const checkHeader = (
 			breakings.substring(breakingStartsWith.length).trim().length > 0 &&
 			!header.includes(breakingMark)
 		) {
-			handleBadCommit('本次更新为破坏性更新，但缺少相关标志👇', '❗')
-			log(parseLogMsg(`破坏性更新所需标志：${breakingMark}`, '❗'))
-			log(parseLogMsg('请修改后再试', '❗'))
+			handleBadCommit('本次更新为破坏性更新，但缺少相关标志👇')
+			log(parseLogMsg(`破坏性更新所需标志：${breakingMark}`))
+			log(parseLogMsg('请修改后再试'))
 			exit(104)
 		}
 		return true
@@ -133,9 +144,9 @@ export const checkBreakings = (
 		breakingsShouldBeStartWith &&
 		!breakings.startsWith(breakingsShouldBeStartWith)
 	) {
-		handleBadCommit(`破坏性更新的详细说明应当以👇`, '❗')
+		handleBadCommit(`破坏性更新的详细说明应当以👇`)
 		parseLogMsg(breakingsShouldBeStartWith)
-		log(parseLogMsg(`开头，请修改后再试`, '❗'))
+		log(parseLogMsg(`开头，请修改后再试`))
 		exit(303)
 	}
 	return true
@@ -155,8 +166,7 @@ export const checkIssue = (issue: string, issueRule: Issue | undefined) => {
 		!issue.startsWith(issueShouldBeStartWith)
 	) {
 		handleBadCommit(
-			`issue 说明应当以${issueShouldBeStartWith}开头，请修改后再试`,
-			'❗'
+			`issue 说明应当以${issueShouldBeStartWith}开头，请修改后再试`
 		)
 		exit(4)
 	} else if (
@@ -172,8 +182,7 @@ export const checkIssue = (issue: string, issueRule: Issue | undefined) => {
 			handleBadCommit(
 				`issue 应当以[${issueShouldBeStartWith.join(
 					'，'
-				)}]中任意一个开头，请修改后再试`,
-				'❗'
+				)}]中任意一个开头，请修改后再试`
 			)
 			exit(4)
 		}

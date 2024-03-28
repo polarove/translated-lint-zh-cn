@@ -1,5 +1,6 @@
 import { Config } from './types'
 import {
+	checkIgnore,
 	checkBody,
 	checkBreakings,
 	checkHeader,
@@ -7,6 +8,7 @@ import {
 } from './supervisor'
 
 export const processMsg = (msg: string, config: Config) => {
+	checkIgnore(msg, config.ignored)
 	const { header, body, breakings, issue } = stripper(msg)
 	checkHeader(header, breakings, config.header, config.breakings)
 	checkBody(body, config.body)
