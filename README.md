@@ -9,7 +9,7 @@
 
 ## 演示
 
-![演示图片](https://raw.githubusercontent.com/polarove/translated-lint-zh-cn/assets/demo.gif)
+![演示图片](https://raw.githubusercontent.com/polarove/translated-lint-zh-cn/master/assets/demo.gif)
 
 ## 马上使用
 
