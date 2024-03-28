@@ -54,10 +54,6 @@ export const checkIgnore = (
 		const shouldBeIgnored = ignoredCases.some((reg) =>
 			new RegExp(reg.rule, reg.flag).test(msg.trim())
 		)
-		writeFileSync(
-			'ignore.json',
-			JSON.stringify({ msg, shouldBeIgnored, ignoredCases })
-		)
 		if (shouldBeIgnored) {
 			hadnleQualifiedCommit('根据给定规则，忽略本次检查')
 			exit(0)
