@@ -52,9 +52,9 @@ export const checkIgnore = (
 ) => {
 	if (ignoredCases && ignoredCases.length > 0) {
 		let shouldBeIgnored = null
-		ignoredCases.every((reg: Ignored) => {
-			shouldBeIgnored = new RegExp(reg.rule, reg.flag).test(msg)
-		})
+		ignoredCases.some((reg: Ignored) =>
+			new RegExp(reg.rule, reg.flag).test(msg)
+		)
 		if (shouldBeIgnored) {
 			hadnleQualifiedCommit('根据给定规则，忽略本次检查')
 			exit(0)
