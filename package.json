@@ -1,6 +1,6 @@
 {
 	"name": "@translated-lint/zh-cn",
-	"version": "0.0.18-0",
+	"version": "0.0.18",
 	"description": "简体中文提交消息检查器",
 	"type": "commonjs",
 	"main": "index.ts",
