@@ -1,38 +1,43 @@
 {
-    "name": "@translated-lint/zh-cn",
-    "version": "0.0.11",
-    "description": "简体中文提交消息检查器",
-    "type": "commonjs",
-    "main": "index.ts",
-    "keywords": [
-        "检查提交消息",
-        "简体中文"
-    ],
-    "scripts": {
-        "prepare": "husky",
-        "build": "tsc",
-        "postbuild": "node scripts/build.js"
-    },
-    "exports": {
-        "types": "./lib/types.d.ts"
-    },
-    "author": "liuqi <liuqi6602@163.com>",
-    "license": "MIT",
-    "devDependencies": {
-        "@cz-translated-changelog/zh-cn": "^0.0.35",
-        "@types/node": "^20.11.30",
-        "commitizen": "^4.3.0",
-        "husky": "^9.0.11"
-    },
-    "config": {
-        "commitizen": {
-            "path": "node_modules/@cz-translated-changelog/zh-cn"
-        }
-    },
-    "publishConfig": {
-        "access": "public"
-    },
-    "bin": {
-        "tlzc": "lib/index.js"
-    }
+	"name": "@translated-lint/zh-cn",
+	"version": "0.0.11",
+	"description": "简体中文提交消息检查器",
+	"type": "commonjs",
+	"main": "index.ts",
+	"keywords": [
+		"检查提交消息",
+		"简体中文"
+	],
+	"scripts": {
+		"prepare": "husky",
+		"build": "tsc",
+		"postbuild": "node scripts/build.js"
+	},
+	"homepage": "https://github.com/polarove/translated-lint-zh-cn",
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/polarove/translated-lint-zh-cn"
+	},
+	"exports": {
+		"types": "./lib/types.d.ts"
+	},
+	"author": "liuqi <liuqi6602@163.com>",
+	"license": "MIT",
+	"devDependencies": {
+		"@cz-translated-changelog/zh-cn": "^0.0.35",
+		"@types/node": "^20.11.30",
+		"commitizen": "^4.3.0",
+		"husky": "^9.0.11"
+	},
+	"config": {
+		"commitizen": {
+			"path": "node_modules/@cz-translated-changelog/zh-cn"
+		}
+	},
+	"publishConfig": {
+		"access": "public"
+	},
+	"bin": {
+		"tlzc": "lib/index.js"
+	}
 }
