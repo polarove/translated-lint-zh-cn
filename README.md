@@ -3,7 +3,7 @@
 > [!TIP]
 > 全中文提交消息检查器
 >
-> 建议搭配 [@cz-translated-changelog/zh-cn](https://www.npmjs.com/package/@cz-translated-changelog/zh-cn) 使用
+> 建议搭配 [@cz-translated-changelog/zh-cn](https://www.npmjs.com/package/@cz-translated-changelog/zh-cn) 和 [husky](https://github.com/typicode/husky) 使用
 
 [![npm version](https://img.shields.io/npm/v/@translated-lint/zh-cn.svg?style=flat-square)](https://www.npmjs.com/package/@cz-translated-changelog/zh-cn) [![npm downloads](https://img.shields.io/npm/dm/@translated-lint/zh-cn.svg?style=flat-square)](http://npm-stat.com/charts.html?package=@translated-lint/zh-cn&from=2024-03-16)
 
@@ -22,12 +22,12 @@ npm i husky @cz-translated-changelog/zh-cn @translated-lint/zh-cn -D
 初始化 husky
 
 ```sh
-npm run husky
+npx husky init
 ```
 
 在项目根目录找到 `.husky` 文件夹，创建一个名为 `commit-msg` 的文件（没有后缀名），将下面的内容复制进去
 
-```
+```sh
 #!/bin/bash
 
 echo "[${0}]：正在检查提交消息"
@@ -55,6 +55,8 @@ npx tlzc --path ${1}
 
 issue 相关：以 ["功能","修复","重构","发布","测试","文档","格式","优化","构建","ci","撤回","其他"] 中的一个开头即可
 
+忽视规则：正则表达式数组，默认忽视以v|merge|pull request开头（忽视大小写）以及版本号提交消息
+
 ## 自定义规则
 
 根目录下创建一个 `tlzc-config.ts` 文件
@@ -68,3 +70,14 @@ const config: Config = {}
 // 默认导出
 export default config
 ```
+
+编辑 husky 的 `commit-msg` 文件
+
+```sh
+#!/bin/bash
+
+echo "[${0}]：正在检查提交消息"
+
+npx tlzc --config tlzc-config.ts --path ${1}
+```
+
