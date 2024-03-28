@@ -4,7 +4,6 @@ import { log } from 'console'
 import { exit } from 'process'
 import { parseLogMsg } from './informer'
 import type { Config } from './types'
-import { writeFileSync } from 'fs'
 
 // 每次提交前都会重新生成一次
 export const getDefaultConfig = async () => {
