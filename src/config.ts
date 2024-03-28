@@ -49,7 +49,10 @@ export const getDefaultConfig = async () => {
 		issue: {
 			startsWith: defaultTypes
 		},
-		ignored: [{ rule: '^v|merge|pull request', flag: 'i' }]
+		ignored: [
+			{ rule: '^v|merge|pull request', flag: 'i' },
+			{ rule: '\\d+(?:\\.\\d+){2}' }
+		]
 	}
 	return { defaultConfig }
 }
