@@ -3,7 +3,12 @@ export interface Config {
 	body: Body
 	breakings?: Breakings
 	issue?: Issue
-	ignored?: RegExp[]
+	ignored?: Ignored[]
+}
+
+export interface Ignored {
+	rule: string
+	flag?: string
 }
 
 interface _BasicConfig {

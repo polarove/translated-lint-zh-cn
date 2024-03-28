@@ -1,11 +1,12 @@
 #!/usr/bin/env node
 
-import { readFileSync } from 'fs'
+import { readFileSync, writeFileSync } from 'fs'
 import { Config } from './types'
 import { exit } from 'process'
 import { getDefaultConfig, getCustomConfig } from './config'
 import { parseLogMsg, hadnleQualifiedCommit } from './informer'
 import { processMsg } from './factory'
+import { log } from 'console'
 
 /**
  * 		 		   type scope subject
@@ -57,8 +58,17 @@ const main = async () => {
 
 	if (!tempfilePath) noCommitEditMsgFileFound()
 	const message = readFileSync(tempfilePath!, { encoding: 'utf-8' })
-	if (customConfigPath) processMsg(message, customConfigs)
-	else processMsg(message, defaultConfig)
+	if (customConfigPath) {
+		log(parseLogMsg(`使用自定义配置文件 ${customConfigPath}`))
+		processMsg(message, customConfigs)
+	} else {
+		log(parseLogMsg('使用默认配置文件'))
+		writeFileSync(
+			'defaultIgnored.json',
+			JSON.stringify(defaultConfig.ignored)
+		)
+		processMsg(message, defaultConfig)
+	}
 	hadnleQualifiedCommit('提交消息通过检查！你真棒！')
 }
 main()

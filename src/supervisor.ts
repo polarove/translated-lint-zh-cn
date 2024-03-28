@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 
-import { Body, Breakings, Header, Issue } from './types'
+import { Body, Breakings, Header, Ignored, Issue } from './types'
 import { log } from 'console'
 import { parseLogMsg, handleBadCommit, hadnleQualifiedCommit } from './informer'
 import { exit } from 'process'
+import { writeFileSync } from 'fs'
 
 const checkWidth = (
 	partName: string,
@@ -47,10 +48,13 @@ const checkInclude = (
 
 export const checkIgnore = (
 	msg: string,
-	ingoredCases: RegExp[] | undefined
+	ignoredCases: Ignored[] | undefined
 ) => {
-	if (ingoredCases) {
-		const shouldBeIgnored = ingoredCases.every((reg) => reg.test(msg))
+	if (ignoredCases && ignoredCases.length > 0) {
+		let shouldBeIgnored = null
+		ignoredCases.every((reg: Ignored) => {
+			shouldBeIgnored = new RegExp(reg.rule, reg.flag).test(msg)
+		})
 		if (shouldBeIgnored) {
 			hadnleQualifiedCommit('根据给定规则，忽略本次检查')
 			exit(0)

@@ -30,7 +30,7 @@ export const getDefaultConfig = async () => {
 			log(parseLogMsg('跳过本次检查...', '❓'))
 			exit(0)
 		})
-	const defaultConfig = {
+	const defaultConfig: Config = {
 		header: {
 			types: defaultTypes,
 			scopes: [],
@@ -49,7 +49,7 @@ export const getDefaultConfig = async () => {
 		issue: {
 			startsWith: defaultTypes
 		},
-		ignored: [/^(v|merge|pull request)$/i]
+		ignored: [{ rule: '^v|merge|pull request', flag: 'i' }]
 	}
 	return { defaultConfig }
 }

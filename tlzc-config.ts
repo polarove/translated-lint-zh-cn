@@ -2,7 +2,7 @@ import { Config } from './src/types'
 
 const types = ['功能']
 const scopes = ['app', 'component', 'docs', 'style']
-const ignored = [/^(v|merge|pull request)$/i]
+const ignored = [{ rule: '^v|merge|pull request', flag: 'i' }]
 const config: Config = {
 	header: {
 		types: types,
