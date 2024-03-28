@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { Config } from './types'
 import {
 	checkIgnore,

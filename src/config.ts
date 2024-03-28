@@ -1,5 +1,6 @@
-// 默认配置从 @cz-translated-changelog/zh-cn 包获取
+#!/usr/bin/env node
 
+// 默认配置从 @cz-translated-changelog/zh-cn 包获取
 import { log } from 'console'
 import { exit } from 'process'
 import { parseLogMsg } from './informer'

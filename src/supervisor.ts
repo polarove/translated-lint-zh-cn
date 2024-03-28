@@ -4,7 +4,6 @@ import { Body, Breakings, Header, Ignored, Issue } from './types'
 import { log } from 'console'
 import { parseLogMsg, handleBadCommit, hadnleQualifiedCommit } from './informer'
 import { exit } from 'process'
-import { writeFileSync } from 'fs'
 
 const checkWidth = (
 	partName: string,

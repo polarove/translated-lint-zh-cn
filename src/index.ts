@@ -1,12 +1,11 @@
 #!/usr/bin/env node
 
-import { readFileSync, writeFileSync } from 'fs'
+import { readFileSync } from 'fs'
 import { Config } from './types'
 import { exit } from 'process'
 import { getDefaultConfig, getCustomConfig } from './config'
 import { parseLogMsg, hadnleQualifiedCommit } from './informer'
 import { processMsg } from './factory'
-import { log } from 'console'
 
 /**
  * 		 		   type scope subject
