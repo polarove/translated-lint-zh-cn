@@ -51,7 +51,7 @@ export const getDefaultConfig = async () => {
 			startsWith: defaultTypes
 		},
 		ignored: [
-			{ rule: '^v|merge|pull request', flag: 'i' },
+			{ rule: '^v|merge|pull request|revert', flag: 'i' },
 			{ rule: '^\\d+(\\.\\d+){0,2}(-)?.*$' }
 		]
 	}
