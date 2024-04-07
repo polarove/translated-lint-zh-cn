@@ -5,7 +5,7 @@
 >
 > 建议搭配 [@cz-translated-changelog/zh-cn](https://www.npmjs.com/package/@cz-translated-changelog/zh-cn) 和 [husky](https://github.com/typicode/husky) 使用
 
-[![npm version](https://img.shields.io/npm/v/@translated-lint/zh-cn.svg?style=flat-square)](https://www.npmjs.com/package/@cz-translated-changelog/zh-cn) [![npm downloads](https://img.shields.io/npm/dm/@translated-lint/zh-cn.svg?style=flat-square)](http://npm-stat.com/charts.html?package=@translated-lint/zh-cn&from=2024-03-16)
+[![npm version][npm-version-src]][npm-package-href][![npm downloads][npm-monthly-downloads-src]][npm-monthly-downloads-href][![License][license-src]][npm-package-href]
 
 ## 演示
 
@@ -81,3 +81,18 @@ echo "[${0}]：正在检查提交消息"
 npx tlzc --config tlzc-config.ts --path ${1}
 ```
 
+## License
+
+[MIT License](./LICENSE)
+
+<!-- Badges -->
+
+[npm-package-href]: https://npmjs.com/package/@translated-lint/zh-cn
+
+[npm-monthly-downloads-src]: https://img.shields.io/npm/dm/@translated-lint/zh-cn.svg?style=flat-square
+
+[npm-monthly-downloads-href]: http://npm-stat.com/charts.html?package=@translated-lint/zh-cn&from=2024-03-16
+
+[npm-version-src]: https://img.shields.io/npm/v/@translated-lint/zh-cn/latest.svg?style=flat-square
+
+[license-src]: https://img.shields.io/npm/l/@translated-lint/zh-cn.svg?style=flat-square
