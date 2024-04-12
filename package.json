@@ -24,7 +24,7 @@
 	"author": "liuqi <liuqi6602@163.com>",
 	"license": "MIT",
 	"devDependencies": {
-		"@cz-translated-changelog/zh-cn": "^0.0.41",
+		"@cz-translated-changelog/zh-cn": "^0.0.42",
 		"@types/node": "^20.11.30",
 		"commitizen": "^4.3.0",
 		"husky": "^9.0.11"
