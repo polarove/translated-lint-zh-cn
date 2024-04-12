@@ -12,6 +12,6 @@ export const handleBadCommit = (msg: string, affix: string = '⚠️') => {
 	console.log(parseLogMsg(msg, affix))
 }
 
-export const hadnleQualifiedCommit = (msg: string, affix: string = '❤️') => {
+export const hadnleQualifiedCommit = (msg: string, affix: string = '❤️  ') => {
 	console.log(parseLogMsg(msg, affix))
 }
