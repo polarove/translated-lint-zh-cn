@@ -2,4 +2,4 @@
 
 echo "[${0}]: 正在检查提交消息"
 
-tsx src/index.ts --path ${1}
+npx tsx src/index.ts --path ${1}
