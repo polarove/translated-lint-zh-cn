@@ -12,7 +12,7 @@ export const getDefaultConfig = async () => {
 	let maxSubjectWidth: number | null = null
 	let maxBodyWidth: number | null = null
 	// @ts-ignore
-	await import('@cz-translated-changelog/zh-cn/src/options.json')
+	await import('@cz-translated-changelog/zh-cn/src/shared-config.json')
 		.then((res) => {
 			defaultTypes = Object.keys(res.types).map(
 				(key) => res.types[key].title
@@ -21,14 +21,15 @@ export const getDefaultConfig = async () => {
 			maxBodyWidth = res.maxLineWidth
 		})
 		.catch(() => {
-			log(parseLogMsg('默认配置文件失效，请运行', '❓'))
+			log(parseLogMsg('默认配置文件失效，请运行', '⚠️'))
 			log(
 				parseLogMsg(
 					'npm i @cz-translated-changelog/zh-cn@latest -D',
-					'❓'
+					'⚠️'
 				)
 			)
-			log(parseLogMsg('跳过本次检查...', '❓'))
+			log(parseLogMsg('或使用自定自定义配置文件', '⚠️'))
+			log(parseLogMsg('跳过本次检查...', '⚠️'))
 			exit(0)
 		})
 	const defaultConfig: Config = {

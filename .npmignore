@@ -4,6 +4,6 @@ tsconfig.tsbuildinfo
 scripts
 assets
 .husky
-tlzc-config.ts
-index.ts
+.github
+tlzc-config.example.ts
 tsconfig.json
