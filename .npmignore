@@ -1,9 +1,0 @@
-src
-tsconfig.tsbuildinfo
-.gitignore
-scripts
-assets
-.husky
-.github
-tlzc-config.example.ts
-tsconfig.json

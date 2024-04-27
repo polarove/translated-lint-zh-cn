@@ -1,28 +1,26 @@
-#!/usr/bin/env node
-
-import { Config } from './types'
+import { Rule } from './types'
 import {
-	checkIgnore,
-	checkBody,
-	checkBreakings,
-	checkHeader,
-	checkIssue
+    checkIgnore,
+    checkBody,
+    checkBreakings,
+    checkHeader,
+    checkIssue,
 } from './supervisor'
 
-export const processMsg = (msg: string, config: Config) => {
-	checkIgnore(msg, config.ignored)
-	const { header, body, breakings, issue } = stripper(msg)
-	checkHeader(header, breakings, config.header, config.breakings)
-	checkBody(body, config.body)
-	checkBreakings(breakings, config.breakings)
-	checkIssue(issue, config.issue)
+export const processMsg = (msg: string, config: Rule) => {
+    checkIgnore(msg, config.ignored)
+    const { header, body, breakings, issue } = stripper(msg)
+    checkHeader(header, breakings, config.header, config.breakings)
+    checkBody(body, config.body)
+    checkBreakings(breakings, config.breakings)
+    checkIssue(issue, config.issue)
 }
 
 const stripper = (pureMsg: string) => {
-	let msgList = pureMsg.split('\n').filter((line) => line.trim().length > 0)
-	const header = msgList[0] ? msgList[0] : ''
-	const body = msgList[1] ? msgList[1] : ''
-	const breakings = msgList[2] ? msgList[2] : ''
-	const issue = msgList[3] ? msgList[3] : ''
-	return { header, body, breakings, issue }
+    let msgList = pureMsg.split('\n').filter((line) => line.trim().length > 0)
+    const header = msgList[0] ? msgList[0] : ''
+    const body = msgList[1] ? msgList[1] : ''
+    const breakings = msgList[2] ? msgList[2] : ''
+    const issue = msgList[3] ? msgList[3] : ''
+    return { header, body, breakings, issue }
 }
