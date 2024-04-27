@@ -1,6 +1,6 @@
 {
     "name": "@translated-lint/zh-cn",
-    "version": "0.0.31",
+    "version": "0.0.32",
     "description": "简体中文提交消息检查器",
     "keywords": [
         "检查提交消息",
